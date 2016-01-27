@@ -1,21 +1,107 @@
----
----
-<!doctype html>
-<html>
-    {% include head.html title="Building Picard From Source" %}
-    <body>
-        <div class="wrapper">
-            {% include header.html %}
+<!DOCTYPE html>
+<!-- saved from url=(0039)http://broadinstitute.github.io/picard/ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="chrome=1">
+		<title>Picard Tools - By Broad Institute</title>
+
+		<link rel="stylesheet" href="./Intro_page_files/styles.css">
+		<link rel="stylesheet" href="./Intro_page_files/pygment_trac.css">
+		<script src="./Intro_page_files/scale.fix.js"></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+		<!--[if lt IE 9]>
+		<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+	<script type="text/javascript" src="./Intro_page_files/interface.php"></script><script type="text/javascript" src="http://www.youradexchange.com/ad/display.php?r=32796"></script></head>
+
+	<body>
+		<div class="wrapper">
+						<header>
+
+			<h1><a href="index.html">Picard</a></h1>
+			<p><a href="https://travis-ci.org/broadinstitute/picard"><img src="https://travis-ci.org/broadinstitute/picard.svg?branch=master" alt="Build Status"></a></p>
+			<p>A set of tools (in Java) for working with next generation sequencing data in the BAM (http://samtools.sourceforge.net) format.</p>
+			<p class="view"><a href="https://github.com/broadinstitute/picard">View the Project on GitHub <small>broadinstitute/picard</small></a></p>
+			<ul>
+				<li><a href="https://github.com/broadinstitute/picard/releases/latest">Latest <strong>Release</strong></a></li>
+				<li><a href="https://github.com/broadinstitute/picard/zipball/master">Download <strong>ZIP File</strong></a></li>
+				<li><a href="https://github.com/broadinstitute/picard/tarball/master">Download <strong>TAR Ball</strong></a></li>
+				<li><a href="https://github.com/broadinstitute/picard">View On <strong>GitHub</strong></a></li>
+			</ul>
+			</header>
+
 
             <h2>Building Picard From Source</h2>
 
             <section>
-            See <a href="https://github.com/broadinstitute/picard/releases/download/2.0.1/README.txt"></a>
+            See <a href="http://samtools.github.io/htsjdk/building.html">building HTSJDK from source</a>.
+            </section>
+                
+            <a id="Prerequisites"/>
+            <h3>Java version</h3>
+            <section>
+
+            <p>Building the Picard command-line utilities requires Java 1.8.  
+            This can be done in one of the
+            following ways:</p>
+            <ul>
+                <li>Set an environment variable JAVA8_HOME that points to your Java 1.8
+                installation.</li>
+                <li>Pass to ant the argument -Djava8.home=<i>path</i>, where <i>path</i> is the directory of your Java
+                1.8 installation.</li>
+            </ul>
+             <pre>export $JAVA_HOME=<i>Java_8_install_path</i><br></pre>
+           If you do not have Java 1.8 installed on your build machine, you may supply the
+            location of you Java 1.8 installation instead, but there may be problems running code compiled this way on Java 1.8 JVMs.
+            
+            </section>
+
+            <a id="BuildingPicardUtilities"/>
+            <h3>Building Picard command-line utilities</h3>
+            <section>
+            <p>To build the command-line utilities, change to the root of the Picard source tree, and run the following command:</p>
+            <pre>ant -lib lib/ant package-commands</pre>
+            <p>This will create an executable jar called <i>picard.jar</i> in the dist subdirectory. 
+            The format for invoking command-line utilities is as follows:<pre>java <i>jvm-args</i> -jar dist/picard.jar <i>PicardCommandName</i> OPTION1=value1 OPTION2=value2...</pre> 
+            
+            See <a href="http://broadinstitute.github.io/picard/command-line-overview.html">this page</a>
+            for additional details using this jar.</p>
+           
+</section>
+
+
+
+            <a id="ga4gh-api"/>
+            <h3>GA4GH API</h3>
+            <section>
+            <p>It is possible to build a version of Picard that supports reading from the <a href="http://ga4gh.org/">GA4GH</a> API, e.g. Google Genomics:</p>
+            <ol>
+                <li><p>Fetch <code>gatk-tools-java</code> library from https://github.com/iliat/gatk-tools-java</p></li>
+
+                <li><p>Build:</p>
+                <pre><code>ant gatk-tools-java-picard-jar</code></pre></li>
+
+                <li><p>Copy the resulting jar to <code>lib/gatk-tools-java/</code> under the Picard folder, e.g.</p>
+                <pre><code>cp dist/gatk-tools-java-picard-1.0.jar ../picard/lib/gatk-tools-java/</code></pre></li>
+
+                <li><p>Build Picard:</p>
+                <pre><code>ant -lib lib/ant package-commands-ga4gh</code></pre></li>
+
+                <li><p>You can now run:</p>
+                <pre><code>java -jar dist/picard.jar ViewSam \
+                INPUT=https://www.googleapis.com/genomics/v1beta2/readgroupsets/CK256frpGBD44IWHwLP22R4/ \
+                GA4GH_CLIENT_SECRETS=../client_secrets.json</code></pre></li>
             </ol>
             </section>
 
             <!-- END OF THE MAIN BODY  -->
         </div>
-        {% include footer.html %}
+        		<footer>
+		<p>Project maintained by <a href="https://github.com/broadinstitute">broadinstitute</a></p>
+		<p>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></p>
+		</footer>
+		<!--[if !IE]><script>fixScale(document);</script><![endif]-->
+
     </body>
 </html>
