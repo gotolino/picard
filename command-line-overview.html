@@ -40,9 +40,6 @@
 <p>The format for invoking a specific tool is as follows:
 <pre>java <i>jvm-args</i> -jar picard.jar <i>PicardToolName</i> OPTION1=value1 OPTION2=value2...</pre>
 
-
-<p>For most of the tools, the JavaVirtualMachine (jvm) heap size can be set for 2GB.  Thus, <i>jvm-args</i> can be set as <pre>java Xmx2g -jar picard.jar</pre>
-
 <p>The &quotPicardToolName&quot refers to the different programs available to the user within the Picard collection.  Some examples include: CollectAlignmentSummaryMetrics, BuildBamIndex, and CreateSequenceDictionary.  The tools and their respective options are described in detail below.</p>
 
 <p>The &quotOPTIONs&quot or arguments are tool-specific and can be files, strings, or integers. For example, INPUT=input.bam is a file option, where INPUT is the &quotOPTION&quot and &quotinput.bam&quot is the file (value).  The string option STRANDSPECIFICITY=NONE contains the argument &quotSTRANDSPECIFICITY&quot in which the values can be: {NONE, FIRST_READ_TRANSCRIPTION_STRAND, SECOND_READ_TRANSCRIPTION_STRAND}. String options frequently have a default value invoked but can be user modified.  MINIMUM_LENGTH=Integer, is an integer option where &quotInteger&quot is a numerical value such as 500.</p>
@@ -53,6 +50,7 @@
       INPUT=/my_data/input.bam \<br>
       OUTPUT=/my_data/output.txt</pre>
 Note that values for file arguments must have appropriate file paths e.g. &quot /my_data/input.bam&quot</p>
+<p>For most of the tools, the JavaVirtualMachine (jvm) heap size can be set for 2GB.  Thus, <i>jvm-args</i> can be set as <pre>java Xmx2g -jar picard.jar</pre>
 			</section>
 			
 			
