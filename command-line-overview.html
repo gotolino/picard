@@ -1,27 +1,25 @@
 <!DOCTYPE html>
-<!-- saved from url=(0039)http://broadinstitute.github.io/picard/ -->
+<!-- saved from url=(0054)file:///Users/dkling/Desktop/Archive/from_website.html -->
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="chrome=1">
-		<title>Picard Tools - By Broad Institute</title>
+		<title>Overview of Picard command-line tools</title>
 
-		<link rel="stylesheet" href="./Intro_page_files/styles.css">
-		<link rel="stylesheet" href="./Intro_page_files/pygment_trac.css">
-		<script src="./Intro_page_files/scale.fix.js"></script>
+		<link rel="stylesheet" href="./Overview of Picard command-line tools_files/styles.css">
+		<link rel="stylesheet" href="./Overview of Picard command-line tools_files/pygment_trac.css">
+		<script src="./Overview of Picard command-line tools_files/scale.fix.js"></script>
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
 		<!--[if lt IE 9]>
 		<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
-	<script type="text/javascript" src="./Intro_page_files/interface.php"></script><script type="text/javascript" src="http://www.youradexchange.com/ad/display.php?r=32796"></script></head>
+	</head>
 
 	<body>
 		<div class="wrapper">
 						<header>
-
-
-			<h1><a href="index.html">Picard</a></h1>
-			<p><a href="https://travis-ci.org/broadinstitute/picard"><img src="https://travis-ci.org/broadinstitute/picard.svg?branch=master" alt="Build Status"></a></p>
+			<h1><a href="file:///Users/dkling/Desktop/Archive/index.html">Picard</a></h1>
+			<p><a href="https://travis-ci.org/broadinstitute/picard"><img src="./Overview of Picard command-line tools_files/picard.svg" alt="Build Status"></a></p>
 			<p>A set of tools (in Java) for working with next generation sequencing data in the BAM (http://samtools.sourceforge.net) format.</p>
 			<p class="view"><a href="https://github.com/broadinstitute/picard">View the Project on GitHub <small>broadinstitute/picard</small></a></p>
 			<ul>
@@ -32,28 +30,16 @@
 			</ul>
 			</header>
 
-			<a id="Overview"/>
-			
+
+			<a id="Overview">
 			<h2>Overview of Picard command-line tools</h2>
 			<section>
-
-<p>The format for invoking a specific tool is as follows:
-<pre>java <i>jvm-args</i> -jar picard.jar <i>PicardToolName</i> OPTION1=value1 OPTION2=value2...</pre>
-
-<p>The &quotPicardToolName&quot refers to the different programs available to the user within the Picard collection.  Some examples include: CollectAlignmentSummaryMetrics, BuildBamIndex, and CreateSequenceDictionary.  The tools and their respective options are described in detail below.</p>
-
-<p>The &quotOPTIONs&quot or arguments are tool-specific and can be files, strings, or integers. For example, INPUT=input.bam is a file option, where INPUT is the &quotOPTION&quot and &quotinput.bam&quot is the file (value).  The string option STRANDSPECIFICITY=NONE contains the argument &quotSTRANDSPECIFICITY&quot in which the values can be: {NONE, FIRST_READ_TRANSCRIPTION_STRAND, SECOND_READ_TRANSCRIPTION_STRAND}. String options frequently have a default value invoked but can be user modified.  MINIMUM_LENGTH=Integer, is an integer option where &quotInteger&quot is a numerical value such as 500.</p>
-
-<p>A typical usage example is as follows.  We use the CollectAlignmentMetrics tool as shown below:
-<pre>java -jar picard.jar CollectAlignmentMetrics \<br>
-      REFERENCE=/my_data/reference.fasta \<br>
-      INPUT=/my_data/input.bam \<br>
-      OUTPUT=/my_data/output.txt</pre>
-Note that values for file arguments must have appropriate file paths e.g. &quot /my_data/input.bam&quot</p>
-<p>For most of the tools, the JavaVirtualMachine (jvm) heap size can be set for 2GB.  Thus, <i>jvm-args</i> can be set as <pre>java Xmx2g -jar picard.jar</pre>
+			<p>The Picard command-line tools are packaged as a single executable jar file.  They require Java
+			1.6.  They can be invoked as follows:</p>
+			<pre>java <i>jvm-args</i> -jar picard.jar <i>PicardCommandName</i> OPTION1=value1 OPTION2=value2...</pre>
+			<p>Most of the commands are designed to run in 2GB of JVM, so the JVM argument -Xmx2g is
+			recommended.</p>
 			</section>
-			
-			
 			<h3>Standard Options</h3>
 			<section>
 			<p>The following options are relevant for most Picard programs:</p>
@@ -200,27 +186,11 @@ Note that values for file arguments must have appropriate file paths e.g. &quot 
 </a><a id="CollectAlignmentSummaryMetrics">
 <h3>CollectAlignmentSummaryMetrics</h3>
 <section>
-<p>Produces a file containing summary alignment metrics from a SAM or BAM</p>Usage example:
-<pre>java -jar picard.jar CollectAlignmentMetrics \<br>R=reference.fasta \<br>I=input.bam \<br>O=output.txt</pre>
-
+<p>Produces a file containing summary alignment metrics from a SAM or BAM.<br></p><h4>Usage example:</h4><pre>    java -jar picard.jar CollectAlignmentMetrics \<br>        R=reference.fasta \<br>        I=input.bam \<br>        O=output.txt</pre><hr><p></p>
 <table>
 <tbody><tr><th>Option</th><th>Description</th></tr>
-<tr><td>MAX_INSERT_SIZE (Integer)</td><td>Paired end reads above this insert size will be considered chimeric along with inter-chromosomal pairs.  Default value: 100000. This option can be set to 'null' to clear the default value</td></tr>
-<tr><td>ADAPTER_SEQUENCE (String)</td><td>List of adapter sequences to use when processing the alignment metrics  Default value: [AATGATACGGCGACCACCGAGATCTACACTCTT
-TCCCTACACGACGCTCTTCCGATCT, 
-AGATCGGAAGAGCTCGTATGCCGTCTTCTGCTTG, 
-AATGATACGGCGACCACC
-GAGATCTACACTCTTTCCCTACACGACGCTCTT
-CCGATCT, 
-AGATCGGAAGAGCGGTTCAGCAGGAATGCCGA
-GACCGATCT
-CGTATGCCGTCTTCTGCTTG, AATGATACGG
-CGACCACC
-GAGATCTACACTCTTTCCCTA
-CACGACGCTCTTCCGATCT, AGATCGGAAGAGCACA
-CGTCTGAACTCCAGTCACNNNNNNNNATC
-TCGTATGCCGTCTTCTGCTTG]. 
-This option can be set to 'null' to clear the default value. This option may be specified 0 or more times. This option can be set to 'null' to clear the default list. </td></tr>
+<tr><td>MAX_INSERT_SIZE (Integer)</td><td>Paired end reads above this insert size will be considered chimeric along with inter-chromosomal pairs.  Default value: 100000. This option can be set to 'null' to clear the default value. </td></tr>
+<tr><td>ADAPTER_SEQUENCE (String)</td><td>List of adapter sequences to use when processing the alignment metrics  Default value: [AATGATACGGCGACCACCGAGATCTACACTCTTTCCCTACACGACGCTCTTCCGATCT, AGATCGGAAGAGCTCGTATGCCGTCTTCTGCTTG, AATGATACGGCGACCACCGAGATCTACACTCTTTCCCTACACGACGCTCTTCCGATCT, AGATCGGAAGAGCGGTTCAGCAGGAATGCCGAGACCGATCTCGTATGCCGTCTTCTGCTTG, AATGATACGGCGACCACCGAGATCTACACTCTTTCCCTACACGACGCTCTTCCGATCT, AGATCGGAAGAGCACACGTCTGAACTCCAGTCACNNNNNNNNATCTCGTATGCCGTCTTCTGCTTG]. This option can be set to 'null' to clear the default value. This option may be specified 0 or more times. This option can be set to 'null' to clear the default list. </td></tr>
 <tr><td>METRIC_ACCUMULATION_LEVEL (MetricAccumulationLevel)</td><td>The level(s) at which to accumulate metrics.    Default value: [ALL_READS]. This option can be set to 'null' to clear the default value. Possible values: {ALL_READS, SAMPLE, LIBRARY, READ_GROUP} This option may be specified 0 or more times. This option can be set to 'null' to clear the default list. </td></tr>
 <tr><td>IS_BISULFITE_SEQUENCED (Boolean)</td><td>Whether the SAM or BAM file consists of bisulfite sequenced reads.    Default value: false. This option can be set to 'null' to clear the default value. Possible values: {true, false} </td></tr>
 <tr><td>REFERENCE_SEQUENCE (File)</td><td>Reference sequence file. Note that while this argument isn't required, without it only a small subset of the metrics will be calculated.  Default value: null. </td></tr>
@@ -303,10 +273,70 @@ This option can be set to 'null' to clear the default value. This option may be 
 </tbody></table>
 </section>
 
+
+
+
+</a><a id="CollectQualityYieldMetrics">
+<h3>CollectQualityYieldMetrics</h3>
+<section>
+<p>This tool helps the user determine the overall quality of a set of reads.  Specifically characterizes numbers of reads as well as the bases within those reads with minimum base-quality scores and pass filters (PF). For information on read filtering, please see our dictionary entry on <a href="http://gatkforums.broadinstitute.org/gatk/discussion/6329/pf-reads-illumina-chastity-filter"><strong>PF reads / Illumina chastity filter.</strong></a></p>
+<p>The CollectQualityYieldMetrics tool can use either the original (OQ) or the re-calibrated base quality scores.  The recalibrated base quality scores are obtained from the Base Quality Score Recalibration (BQSR) tool of GATK.  For detailed information, please see this link:  <a href="http://gatkforums.broadinstitute.org/discussion/44/base-quality-score-recalibration-bqsr"><strong>BQSR</strong></a>.</p>
+<center><h3>Arguments</h3></center>
+<table><tbody>
+<tr><th>Required</th><th>Type</th><th>Description</th></tr>
+<tr><td>INPUT (I)</td><td>File</td><td>A SAM or BAM file to process</td></tr>
+<tr><td>OUTPUT (O)</td><td>File</td><td>The metrics file to write with quality yield metrics
+<tr><th>Optional</th><th></th><th></th></tr>
+<tr><td>USE_ORIGINAL_QUALITIES (OQ)</td><td>Boolean</td><td>Uses the original quality scores (OQ) as inputs instead of the re-calibrated quality scores (QUAL).  Possible values: {true, false}.  Default value: true.  This option can be set to 'null' to clear the default value </td></tr></tbody></table>
+<h4>Usage Example:</h4>
+<pre>java -jar picard.jar CollectQualityYieldMetrics \<br>      I=input.bam \<br>      O=quality_yield_metrics.txt \<br>      OQ=false</pre>
+
+For detailed explanations of the output metrics, please see: <a href="http://broadinstitute.github.io/picard/picard-metric-definitions.html#CollectQualityYieldMetrics.QualityYieldMetrics"> <strong>CollectQualityYieldMetrics.</strong> </a>
+</section>
+
+
+
+
+
+</a><a id="CollectRrbsMetrics">
+<h3>CollectRrbsMetrics</h3>
+<section>
+<p>This tool calculates and reports QC metrics for reduced representation bisulfite sequencing (RRBS) data and is based on the methylation status of cytosine (C) bases in both CpG and non-CpG sites across all reads of a BAM/SAM file.  For detailed information about RRBS, please see <a href="http://gatkforums.broadinstitute.org/gatk/discussion/6330/bisulfite-sequencing-cytosine-methylation?new=1"><strong>RRBS.</strong></a></p>
+            
+<p>This tool outputs metrics in both tabular and graphical forms including the bisulfite conversion rate for CpG and non-CpG cytosines, a distribution of the numbers of CpG sites as a function of CpG conversion rate, the distribution of CpG sites by read coverage, and the numbers of reads discarded due to high numbers of mismatches or inadequate read size.</p>
+   
+<center><h3>Arguments</h3></center>
+<table><tbody><tr><th>Required</th><th>Type</th><th>Description</th></tr>
+
+<tr><td>INPUT (I)</td><td>File</td><td>The BAM or SAM file containing aligned reads. Must be coordinate sorted</td></tr>
+<tr><td>REFERENCE (R)</td><td>File</td><td>The reference sequence in a fasta formatted file</td></tr>
+<tr><td>METRICS_FILE_PREFIX (M)</td><td>String</td><td>Base name for output files
+
+<tr><th>Optional</th><th></th><th></th></tr>
+<tr><td>MINIMUM_READ_LENGTH</td><td>Integer</td><td>Minimum read length.  Default value: 5. This option can be set to 'null' to clear the default value</td></tr>
+<tr><td>C_QUALITY_THRESHOLD</td><td>Integer</td><td>Threshold for base quality of a C base before it is considered.  Default value: 20. This option can be set to 'null' to clear the default value</td></tr>
+<tr><td>NEXT_BASE_QUALITY_THRESHOLD</td><td>Integer	</td><td>Threshold for quality of a base next to a C before the C base is considered.  Default value: 10. This option can be set to 'null' to clear the default value</td></tr>
+<tr><td>MAX_MISMATCH_RATE</td><td>Double</td><td>Maximum percentage of mismatches in a read for it to be considered, with a range of 0-1 Default value: 0.1. This option can be set to 'null' to clear the default value</td></tr>
+<tr><td>SEQUENCE_NAMES</td><td>String</td><td>Set of sequence names to consider, if not specified all sequences will be used.  This option may be specified 0 or more times	</td></tr>
+<tr><td>ASSUME_SORTED (AS)</td><td>Boolean</td><td>If true, assume that the input file is coordinate sorted even if the header says otherwise.  Default value: false. This option can be set to 'null' to clear the default value. Possible values: {true, false}</td></tr>
+<tr><td>METRIC_ACCUMULATION_LEVEL (LEVEL)</td><td>Boolean</td><td>The level(s) at which to accumulate metrics.  Possible values: {ALL_READS, SAMPLE, LIBRARY, READ_GROUP} This option may be specified 0 or more times. This option can be set to 'null' to clear the default list</td></tr>
+</tbody></table>
+<h4>Usage example:</h4>
+<pre>java -jar picard.jar CollectRrbsMetrics \<br>      I=myBAM.bam \<br>      M=metrics.rrbsmetrics \<br>      R=reference.fasta </pre>
+            
+For detailed descriptions of the output metrics, please see: <a href="http://broadinstitute.github.io/picard/picard-metric-definitions.html#RrbsCpgDetailMetrics"><strong>RrbsCpgDetailMetrics</strong></a> and <a href="http://broadinstitute.github.io/picard/picard-metric-definitions.html#RrbsSummaryMetrics"><strong>RrbsSummaryMetrics</strong></a>
+
+</section>
+
+
+
+
+
+
 </a><a id="CollectTargetedPcrMetrics">
 <h3>CollectTargetedPcrMetrics</h3>
 <section>
-<p>Calculates a set of metrics to Illumina Truseq Custom Amplicon sequencing from an aligned SAMor BAM file. If a reference sequence is provided, AT/GC dropout metrics will be calculated, and the PER_TARGET_COVERAGE option can be used to output GC and mean coverage information for every target.</p>
+<p>Calculates a set of metrics to Illumina Truseq Custom Amplicon sequencing from an aligned SAM or BAM file. If a reference sequence is provided, AT/GC dropout metrics will be calculated, and the PER_TARGET_COVERAGE option can be used to output GC and mean coverage information for every target.</p>
 <table>
 <tbody><tr><th>Option</th><th>Description</th></tr>
 <tr><td>AMPLICON_INTERVALS (File)</td><td>An interval list file that contains the locations of the baits used.  Required. </td></tr>
@@ -326,8 +356,8 @@ This option can be set to 'null' to clear the default value. This option may be 
 <p>Collect metrics about the alignment of RNA to various functional classes of loci in the genome:coding, intronic, UTR, intergenic, ribosomal. Also determines strand-specificity for strand-specific libraries.</p>
 <table>
 <tbody><tr><th>Option</th><th>Description</th></tr>
-<tr><td>REF_FLAT (File)</td><td>Gene annotations in refFlat form.  Format described here: <a href="http://genome.ucsc.edu/goldenPath/gbdDescriptionsOld.html#RefFlat"><strong>RefFlat</strong></a>  Required. </td></tr>
-<tr><td>RIBOSOMAL_INTERVALS (File)</td><td>Location of rRNA sequences in genome, in interval_list format.  If not specified no bases will be identified as being ribosomal.  Format described here: <a href="http://samtools.github.io/htsjdk/javadoc/htsjdk/htsjdk/samtools/util/IntervalList.html"><strong>IntervalList</strong></a>  Default value: null. </td></tr>
+<tr><td>REF_FLAT (File)</td><td>Gene annotations in refFlat form.  Format described here: http://genome.ucsc.edu/goldenPath/gbdDescriptionsOld.html#RefFlat  Required. </td></tr>
+<tr><td>RIBOSOMAL_INTERVALS (File)</td><td>Location of rRNA sequences in genome, in interval_list format.  If not specified no bases will be identified as being ribosomal.  Format described here: http://samtools.github.io/htsjdk/javadoc/htsjdk/htsjdk/samtools/util/IntervalList.html  Default value: null. </td></tr>
 <tr><td>STRAND_SPECIFICITY (StrandSpecificity)</td><td>For strand-specific library prep. For unpaired reads, use FIRST_READ_TRANSCRIPTION_STRAND if the reads are expected to be on the transcription strand.  Required. Possible values: {NONE, FIRST_READ_TRANSCRIPTION_STRAND, SECOND_READ_TRANSCRIPTION_STRAND} </td></tr>
 <tr><td>MINIMUM_LENGTH (Integer)</td><td>When calculating coverage based values (e.g. CV of coverage) only use transcripts of this length or greater.  Default value: 500. This option can be set to 'null' to clear the default value. </td></tr>
 <tr><td>CHART_OUTPUT (File)</td><td>The PDF file to write out a plot of normalized position vs. coverage.  Default value: null. </td></tr>
@@ -691,10 +721,10 @@ of the barcode read, starting with 1.</number></number></number></number></p>
 <table>
 <tbody><tr><th>Option</th><th>Description</th></tr>
 <tr><td>INPUT (File)</td><td>One or more interval lists. If multiple interval lists are provided the output is theresult of merging the inputs. Supported formats are interval_list and VCF.  Default value: null. This option must be specified at least 1 times. </td></tr>
-<tr><td>OUTPUT (File)</td><td>The output interval list file to write (if SCATTER_COUNT is 1) or the directory into which to write the scattered interval sub-directories (if SCATTER_COUNT &gt; 1)  Default value: null</td></tr>
-<tr><td>PADDING (Integer)</td><td>The amount to pad each end of the intervals by before other operations are undertaken. Negative numbers are allowed and indicate intervals should be shrunk. Resulting intervals &lt; 0 bases long will be removed. Padding is applied to the interval lists &lt;b&gt; before &lt;/b&gt; the ACTION is performed.  Default value: 0. This option can be set to 'null' to clear the default value</td></tr>
-<tr><td>UNIQUE (Boolean)</td><td>If true, merge overlapping and adjacent intervals to create a list of unique intervals. Implies SORT=true  Default value: false. This option can be set to 'null' to clear the default value. Possible values: {true, false}</td></tr>
-<tr><td>SORT (Boolean)</td><td>If true, sort the resulting interval list by coordinate.  Default value: true. This option can be set to 'null' to clear the default value. Possible values: {true, false}</td></tr>
+<tr><td>OUTPUT (File)</td><td>The output interval list file to write (if SCATTER_COUNT is 1) or the directory into which to write the scattered interval sub-directories (if SCATTER_COUNT &gt; 1)  Default value: null. </td></tr>
+<tr><td>PADDING (Integer)</td><td>The amount to pad each end of the intervals by before other operations are undertaken. Negative numbers are allowed and indicate intervals should be shrunk. Resulting intervals &lt; 0 bases long will be removed. Padding is applied to the interval lists &lt;b&gt; before &lt;/b&gt; the ACTION is performed.  Default value: 0. This option can be set to 'null' to clear the default value. </td></tr>
+<tr><td>UNIQUE (Boolean)</td><td>If true, merge overlapping and adjacent intervals to create a list of unique intervals. Implies SORT=true  Default value: false. This option can be set to 'null' to clear the default value. Possible values: {true, false} </td></tr>
+<tr><td>SORT (Boolean)</td><td>If true, sort the resulting interval list by coordinate.  Default value: true. This option can be set to 'null' to clear the default value. Possible values: {true, false} </td></tr>
 <tr><td>ACTION (Action)</td><td>Action to take on inputs.  Default value: CONCAT. This option can be set to 'null' to clear the default value. Possible values: {
 <p>CONCAT (The concatenation of all the INPUTs, no sorting or merging of overlapping/abutting intervals implied. Will result in an unsorted list unless requested otherwise.)
 </p><p>UNION (Like CONCATENATE but with UNIQUE and SORT implied, the result being the set-wise union of all INPUTS.)
@@ -707,8 +737,7 @@ of the barcode read, starting with 1.</number></number></number></number></p>
 <tr><td>SCATTER_COUNT (Integer)</td><td>The number of files into which to scatter the resulting list by locus; in some situations, fewer intervals may be emitted.  Note - if &gt; 1, the resultant scattered intervals will be sorted and uniqued.  The sort will be inverted if the INVERT flag is set.  Default value: 1. This option can be set to 'null' to clear the default value. </td></tr>
 <tr><td>INCLUDE_FILTERED (Boolean)</td><td>Whether to include filtered variants in the vcf when generating an interval list from vcf  Default value: false. This option can be set to 'null' to clear the default value. Possible values: {true, false} </td></tr>
 <tr><td>BREAK_BANDS_AT_MULTIPLES_OF (Integer)</td><td>If set to a positive value will create a new interval list with the original intervals broken up at integer multiples of this value.  Set to 0 to NOT break up intervals  Default value: 0. This option can be set to 'null' to clear the default value. </td></tr>
-<tr><td>SUBDIVISION_MODE (Mode)</td><td>Do not subdivide   Default value: INTERVAL_SUBDIVISION. This option can be set to 'null' to clear the default value. Possible values: {INTERVAL_SUBDIVISION, BALANCING_WITHOUT_INTERVAL_SUBDIVISION, BALANCING_WITHOUT_INTERVAL_SUBDIVISION_WITH_
-OVERFLOW} </td></tr>
+<tr><td>SUBDIVISION_MODE (Mode)</td><td>Do not subdivide   Default value: INTERVAL_SUBDIVISION. This option can be set to 'null' to clear the default value. Possible values: {INTERVAL_SUBDIVISION, BALANCING_WITHOUT_INTERVAL_SUBDIVISION, BALANCING_WITHOUT_INTERVAL_SUBDIVISION_WITH_OVERFLOW} </td></tr>
 <tr><td>INVERT (Boolean)</td><td>Produce the inverse list  Default value: false. This option can be set to 'null' to clear the default value. Possible values: {true, false} </td></tr>
 </tbody></table>
 </section>
